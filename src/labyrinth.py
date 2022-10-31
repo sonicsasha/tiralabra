@@ -29,7 +29,7 @@ class Labyrinth:
         for rivi in range(0,len(self.labyrinth)):
             for sarake in range(0,len(self.labyrinth[0])):
                 if self.labyrinth[rivi][sarake] == "#":
-                    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(sarake*cell_size, rivi*cell_size, cell_size, cell_size))
+                    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(sarake*cell_size, rivi*cell_size, cell_size + 1, cell_size))
         
         pygame.display.flip()
 
