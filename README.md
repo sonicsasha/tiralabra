@@ -1,5 +1,5 @@
 # tiralabra
-Labyrinttigeneraattori Helsingin Yliopiston kurssia varten
+Tämä on yksinkertainen ohjelma, joka generoi labyrintin kun sille annetaan syötteenä labyrintin koko sekä kuinka monessa askeleessa labyrintti täytyy läpäistä.
 
 ## Dokumentaatio
 * [Määrittelydokumentti](/docs/MAARITTELYDOKUMENTTI.md)
