@@ -5,4 +5,4 @@ Labyrinttigeneraattori Helsingin Yliopiston kurssia varten
 * [Määrittelydokumentti](/docs/MAARITTELYDOKUMENTTI.md)
 
 ## Viikkoraportit
-* [Viikko 1](/docs/Viikkoraportit/Viikkoraportti 1.md)
+* [Viikko 1](/docs/Viikkoraportit/Viikkoraportti_1.md)
