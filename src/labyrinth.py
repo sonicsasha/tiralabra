@@ -15,14 +15,15 @@ class Labyrinth:
         elif (width % 2 == 0 or height % 2 == 0):
             raise UserInputError ("Labyrintin leveyden ja korkeuden täytyy olla parittomia lukuja.")
         
-        elif (width + height - 2 > min_step_count):
-            raise UserInputError ("""Annetun kokoista labyrinttiä ei pysty ratkaisemaan annetussa määrässä askelia.
-                                    Ole hyvä ja anna joko pienempi labyrintin koko tai suurempi määrä askelia.""")
+        elif (min_step_count > steps_required):
+            raise UserInputError (f"""Annetun kokoista labyrinttiä ei pysty ratkaisemaan annetussa määrässä askelia.
+                                    Ole hyvä ja anna joko pienempi labyrintin koko tai suurempi määrä askelia.
+                                    Pienin määrä askelia annetuulla koolla on {min_step_count}""")
     
 
         elif (steps_required - min_step_count)%4 != 0:
             raise UserInputError(f"""Annetun kokoista labyrinttiä ei pysty ratkaisemaan annetussa määrässä askelia.
-                                    Ole hyvä, ja anna joko suurempi labyrintin koko tai eri määrä askelia.
+                                    Ole hyvä, ja anna joko eri labyrintin koko tai eri määrä askelia.
                                     Lähimmät mahdolliset askeleet ovat {((steps_required)//4)*4} ja {((steps_required)//4)*4 + 4}""")
 
         self.labyrinth = []
@@ -38,7 +39,7 @@ class Labyrinth:
         self.width = len(labyrinth[0])
         self.height = len(labyrinth)
     
-    def generate_path(self):
+    def generate_path_start_to_finish(self):
         self.path_found = False
         shortest_taxi_distance = self.width + self.height - 2
 
@@ -101,6 +102,54 @@ class Labyrinth:
             except IndexError:
                 pass
 
+    def generate_maze_around_path(self):
+        path_cells = []
+
+        for i in range(len(self.labyrinth)):
+            for j in range(len(self.labyrinth[i])):
+                if self.labyrinth[i][j]=="." and i%2 == 0 and j%2 == 0:
+                    path_cells.append((i,j))
+        
+        random.shuffle(path_cells)
+
+        directions = [(-2,0), (2,0), (0,2), (0,-2)]
+
+        for cell in path_cells:
+            random.shuffle(directions)
+
+            for direction in directions:
+                try:
+                    if cell[0] + direction[0] < 0 or cell[1] + direction[1] < 0:
+                        continue
+
+                    if self.labyrinth[cell[0] + direction[0]][cell[1] + direction[1]] == "#":
+                        self.labyrinth[cell[0] + direction[0]//2][cell[1] + direction[1]//2] = "."
+                        self.generate_random_path(cell[0] + direction[0], cell[1] + direction[1])
+                except IndexError:
+                    pass
+
+    def generate_random_path(self, y, x):
+        stack = []
+        stack.append(((y,x),(y,x)))
+        directions = [(-2,0), (2,0), (0,2), (0,-2)]
+        while len(stack)!=0:
+            current = stack.pop()
+            wall_break = current[0]
+            new_cell = current[1]
+            if self.labyrinth[new_cell[0]][new_cell[1]] == "#" and self.labyrinth[wall_break[0]][wall_break[1]] == "#":
+                self.labyrinth[new_cell[0]][new_cell[1]] = "."
+                self.labyrinth[wall_break[0]][wall_break[1]] = "."
+                random.shuffle(directions)
+                for direction in directions:
+                    try:
+                        if new_cell[0] + direction[0] < 0 or new_cell[1] + direction[1] < 0:
+                            continue
+
+                        if self.labyrinth[new_cell[0] + direction[0]][new_cell[1] + direction[1]] == "#":
+                            stack.append(((new_cell[0]+direction[0]//2,new_cell[1] + direction[1]//2),(new_cell[0] + direction[0], new_cell[1] + direction[1])))
+                    
+                    except IndexError:
+                        pass
 
 
 
@@ -118,7 +167,7 @@ class Labyrinth:
         for rivi in range(0,len(self.labyrinth)):
             for sarake in range(0,len(self.labyrinth[0])):
                 if self.labyrinth[rivi][sarake] == "#":
-                    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(sarake*cell_size, rivi*cell_size, cell_size - 1, cell_size - 1))
+                    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(sarake*cell_size, rivi*cell_size, cell_size + 1, cell_size + 1))
         
         pygame.display.flip()
 

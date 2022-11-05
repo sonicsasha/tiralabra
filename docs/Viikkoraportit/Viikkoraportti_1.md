@@ -15,3 +15,14 @@ Lisäksi jäin jumiin sellaiseen pieneen kohtaan, että miten voidaan laskea pis
 Lisäksi jäi mietityttämään, että saako/kannattaako käyttää Pythonin random-kirjaston satunnaislukugeneraattoreita vai pitääkö ne kehittää itse?
 
 Algoritmin kirjoittamiseen meni noin 4-5 tuntia.
+
+UPDATE 5.11
+
+Sain tänään kirjoitettua algoritmin, joka luo labyrintin luodun polun ympärille satunnaisella syvyyshaulla. Siihen meni noin puolitoista tuntia. 
+
+Minun suurimmat huolenaiheet tällä hetkellä ovat seuraavat:
+* Miten saisin kirjoitettua polun generoinnin niin, että se ei käyttäisi rekursiota. Koska tällä hetkellä siinä tarvitaan peruutusta.
+
+* Onko aiheeni tällä hetkellä riittävän laaja arvosanaa 5 varten vai kannattaako minun tehdä vielä jotain muutakin? Tiedän, että en ole vielä kirjoittanut testejä tai muuta dokumentaatiota, mutta olen jo vähän huolissani siitä kuinka nopeasti olen edennyt :DDD
+
+Seuraavaksi voisin jo alkaa kirjoittamaan testejä, jotta en vahingossa kirjoittaisi valmista koodia ja vasta loppypäädyssä tajua, että olen tehnyt jonkun pahan virheen.
