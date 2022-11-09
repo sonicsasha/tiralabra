@@ -6,3 +6,6 @@ Tämä on yksinkertainen ohjelma, joka generoi labyrintin kun sille annetaan sy�
 
 ## Viikkoraportit
 * [Viikko 1](/docs/Viikkoraportit/Viikkoraportti_1.md)
+
+## Kattavuusraportti
+[![codecov](https://codecov.io/gh/sonicsasha/tiralabra/branch/main/graph/badge.svg?token=KDR8Z7R8I1)](https://codecov.io/gh/sonicsasha/tiralabra)
