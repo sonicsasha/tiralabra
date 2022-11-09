@@ -17,6 +17,8 @@ jobs:
     - name: Install dependencies
       run: poetry install
     - name: Generate Report
-      run: poetry run coverage run -m pytest src
+      run: |
+          poetry run coverage run -m pytest src
+          poetry run coverage xml
     - name: Upload Coverage to Codecov
       uses: codecov/codecov-action@v2
