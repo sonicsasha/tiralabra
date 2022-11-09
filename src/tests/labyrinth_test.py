@@ -21,9 +21,6 @@ class TestLabyrinthGeneration(unittest.TestCase):
     def test_can_create_maze_with_valid_inputs(self):
         maze = Labyrinth(5,5,12)
         self.assertNotEqual(maze.labyrinth_matrix, None)
-    
-    def test_set_labyrinth(self):
-        maze = Labyrinth()
 
 class TestLabyrinthFeatures(unittest.TestCase):
     def setup_class(self):
