@@ -12,3 +12,11 @@ def test(c):
 def coverage(c):
     c.run("coverage run -m pytest src")
     c.run("coverage html")
+
+@task
+def format(c):
+    c.run("black src")
+
+@task
+def lint(c):
+    c.run("pylint src")

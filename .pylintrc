@@ -1,0 +1,10 @@
+[MASTER]
+disable=
+    C0114, # missing-module-docstring
+
+extension-pkg-whitelist=
+	pygame
+
+good-names=x,y,p,i,j
+
+ignore=tests
