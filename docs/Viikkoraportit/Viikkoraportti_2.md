@@ -13,3 +13,7 @@ Kaiken kaikkiaan olen tyytyväinen tämän projektin nykyiseen vaiheeseen. Kaikk
 Ehkä vielä yksi asia joka mietityttää hieman on se, että mitä labyrintin ominaisuuksia on tärkeä testata? Testaan tällä hetkellä automaattisilla testeillä sen, että labyrintti on yhtenäinen ja että alusta loppuun pääsee halutussa määrässä askelia.
 
 Seuraavaksi alan joko kirjoittamaan toista labyrintin luontialgoritmia tai sitten yritän vain siistiä koodia ja lisätä kommentteja, jotta koodi olisi mahdollisimman ymmärrettävää. Katson fiiliksen mukaan.
+
+12.11.2022
+
+Tänään sain kirjoitettua toisen luontialgoritmin käyttäen Primin algoritmia. Siinä ei erityisemmin ollut vaikeuksia. Siihen meni vähän päälle tunti. Seuraavaksi alan varmaankin siivoamaan ja optimoimaan koodia, sekä kirjoittamaan dokumentaatiota ja tekemään parempaa käyttöliittymää, jotta vertailu algoritmien välillä olisi helpompaa.

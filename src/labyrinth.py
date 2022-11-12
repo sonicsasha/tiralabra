@@ -57,20 +57,35 @@ class Labyrinth:
         self.width = width
         self.height = height
         self.steps_required = steps_required
+
+        # This is used for the randomized path generation
         self.broken_walls = []
 
-        # If conditions are met and everything is alright, generate an "empty" maze filled with "#"
+        # This is used for Prim's algorithm
+        self.walls_to_break = []
+
+        # If conditions are met and everything is alright, generate an empty maze filled with "#"
 
         for _ in range(0, height):
             self.labyrinth_matrix.append(["#"] * width)
 
-    def generate_maze(self):
+    def generate_maze_dfs(self):
         """A function that generates a maze using the class' variables.
+        The generated maze is created using randomized depth first algorithm.
         Used for tests.
         """
         self.generate_random_shortest_path()
         self.generate_sidesteps()
-        self.generate_maze_around_path()
+        self.generate_maze_around_path_dfs()
+
+    def generate_maze_prim(self):
+        """A function that generates a maze using the class' variables.
+        The generated maze is created using randomized Prim's algorithm.
+        Used for tests.
+        """
+        self.generate_random_shortest_path()
+        self.generate_sidesteps()
+        self.generate_maze_around_path_prim()
 
     def generate_random_shortest_path(self):
         """Generates a randomized path that is always heading towards the goal.
@@ -201,7 +216,7 @@ class Labyrinth:
                 except IndexError:
                     pass
 
-    def generate_maze_around_path(self):
+    def generate_maze_around_path_dfs(self):
         """Given that a random path from start to finish has been generated,
         generate a maze around that path
 
@@ -311,3 +326,77 @@ class Labyrinth:
 
                     except IndexError:
                         pass
+
+    def generate_maze_around_path_prim(self):
+        """Given that a random path has been generated, creates a maze around that path
+        using Prim's algorithm.
+
+        The algorithm goes through every cell in the path
+        and adds the adjacent walls and the cell those walls lead to to a list.
+        """
+        self.walls_to_break = []
+
+        # Go through the path and add the walls of the path to a path list.
+
+        for row_number, row in enumerate(self.labyrinth_matrix):
+            for column_number, cell in enumerate(row):
+                if (
+                    self.labyrinth_matrix[row_number][column_number] == "."
+                    and row_number % 2 == 0
+                    and column_number % 2 == 0
+                ):
+                    self._add_adjacent_walls_to_list(row_number, column_number)
+
+        while len(self.walls_to_break) > 0:
+            # Pop a random item from list
+            i = random.randrange(len(self.walls_to_break))
+            self.walls_to_break[i], self.walls_to_break[-1] = (
+                self.walls_to_break[-1],
+                self.walls_to_break[i],
+            )
+            wall, cell = self.walls_to_break.pop()
+
+            wall_y = wall[0]
+            wall_x = wall[1]
+
+            cell_y = cell[0]
+            cell_x = cell[1]
+
+            if (
+                self.labyrinth_matrix[wall_y][wall_x] == "#"
+                and self.labyrinth_matrix[cell_y][cell_x] == "#"
+            ):
+                self.labyrinth_matrix[wall_y][wall_x] = "."
+                self.labyrinth_matrix[cell_y][cell_x] = "."
+
+                self._add_adjacent_walls_to_list(cell_y, cell_x)
+
+    def _add_adjacent_walls_to_list(self, y, x):
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+        for direction in directions:
+            if y + direction[0] < 0 or x + direction[1] < 0:
+                continue
+
+            try:
+                if (
+                    self.labyrinth_matrix[y + direction[0]][x + direction[1]] == "#"
+                    and self.labyrinth_matrix[y + 2 * direction[0]][
+                        x + 2 * direction[1]
+                    ]
+                    == "#"
+                ):
+                    self.walls_to_break.append(
+                        (
+                            (
+                                y + direction[0],
+                                x + direction[1],
+                            ),
+                            (
+                                y + 2 * direction[0],
+                                x + 2 * direction[1],
+                            ),
+                        )
+                    )
+            except IndexError:
+                pass

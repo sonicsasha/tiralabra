@@ -6,6 +6,6 @@ if __name__ == "__main__":
     labyrinth = Labyrinth(1001, 1001, 2800)
     labyrinth.generate_random_shortest_path()
     labyrinth.generate_sidesteps()
-    labyrinth.generate_maze_around_path()
+    labyrinth.generate_maze_around_path_prim()
 
     draw_labyrinth(labyrinth)
