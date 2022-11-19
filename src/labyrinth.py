@@ -45,12 +45,15 @@ class Labyrinth:
             )
 
         if (steps_required - min_step_count) % 4 != 0:
+            acceptable_step_count = (
+                min_step_count + ((steps_required - min_step_count) // 4) * 4
+            )
             raise UserInputError(
                 f"""Annetun kokoista labyrinttiä ei pysty ratkaisemaan
                 annetussa määrässä askelia.
                 Ole hyvä, ja anna joko eri labyrintin koko tai eri määrä askelia.
                 Lähimmät mahdolliset askeleet ovat
-                {((steps_required)//4)*4} ja {((steps_required)//4)*4 + 4}"""
+                {acceptable_step_count} ja {acceptable_step_count + 4}"""
             )
 
         self.labyrinth_matrix = []
@@ -128,13 +131,13 @@ class Labyrinth:
 
             self.labyrinth_matrix[y][x] = "."
 
+        return self.labyrinth_matrix
+
     def generate_sidesteps(self):
         """Creates sidesteps to the randomly generated shortes path.
         Every sidesteps increases the path length by 4.
         """
         sidesteps_to_do = (self.steps_required - (self.width + self.height - 2)) // 4
-
-        random.shuffle(self.broken_walls)
 
         while sidesteps_to_do > 0:
             if len(self.broken_walls) == 0:
@@ -142,6 +145,13 @@ class Labyrinth:
                     """Labyrintin luonti epäonnistui, sillä vaadittavien askelten määrä on
                     liian iso. Kasvata labyrintin kokoa tai vähennä askelten määrää"""
                 )
+            # Choose a random wall from the list and remove it from the list.
+            random_index = random.randint(0, len(self.broken_walls) - 1)
+            self.broken_walls[-1], self.broken_walls[random_index] = (
+                self.broken_walls[random_index],
+                self.broken_walls[-1],
+            )
+
             current_broken_wall = self.broken_walls.pop()
             y = current_broken_wall[0]
             x = current_broken_wall[1]
@@ -186,7 +196,6 @@ class Labyrinth:
 
                             self.labyrinth_matrix[y][x] = "#"
 
-                            random.shuffle(self.broken_walls)
                             sidesteps_to_do -= 1
                             break
 
@@ -215,6 +224,8 @@ class Labyrinth:
                             break
                 except IndexError:
                     pass
+
+        return self.labyrinth_matrix
 
     def generate_maze_around_path_dfs(self):
         """Given that a random path from start to finish has been generated,
@@ -370,6 +381,8 @@ class Labyrinth:
                 self.labyrinth_matrix[cell_y][cell_x] = "."
 
                 self._add_adjacent_walls_to_list(cell_y, cell_x)
+
+        return self.labyrinth_matrix
 
     def _add_adjacent_walls_to_list(self, y, x):
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
