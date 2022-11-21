@@ -41,8 +41,7 @@ class Button:
         return None
 
     def draw_text_on_button(self):
-        """Draws the text on top of the button.
-        """
+        """Draws the text on top of the button."""
         self.button_surface.blit(
             self.button_text,
             [
@@ -53,9 +52,10 @@ class Button:
 
 
 class LabyrinthDrawer:
-    """Class used to draw a list of labyrinths with the ability to choose which labyrinth to draw.
-    """
-    def __init__(self, labyrinths : list):
+    """Class used to draw a list of labyrinths with the ability to choose
+    which labyrinth to draw."""
+
+    def __init__(self, labyrinths: list):
         """Draws the labyrinth
 
         Args:
@@ -78,10 +78,8 @@ class LabyrinthDrawer:
         for labyrinth in labyrinths:
             self.buttons.append(
                 Button(
-                    (button_x,
-                    button_y),
-                    (button_width,
-                    button_height),
+                    (button_x, button_y),
+                    (button_width, button_height),
                     labyrinth[1],
                     labyrinth[0],
                 )
@@ -98,8 +96,7 @@ class LabyrinthDrawer:
         self.draw_loop()
 
     def draw_loop(self):
-        """The main loop of the pygame instance. Draws the screen and checks the button clicks.
-        """
+        """The main loop of the pygame instance. Draws the screen and checks the button clicks."""
         self.draw_labyrinth()
         running = True
         while running:

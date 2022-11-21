@@ -20,3 +20,7 @@ def format(c):
 @task
 def lint(c):
     c.run("pylint src")
+
+@task
+def test_performance(c):
+    c.run("python src/tests/performance_test.py")
