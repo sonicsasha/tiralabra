@@ -9,14 +9,14 @@ from labyrinth import Labyrinth
 #pylint: disable=line-too-long
 #When doing test cases, the prints are long. Dividing prints into multiple lines end up being confusing.
 
-class TestScenarios(Enum):
+class PerformanceTestScenarios(Enum):
     """An enumerator used to determine what the user wants to test."""
     RANDOM_PATH = 1
     DFS_MAZE = 2
     PRIM_MAZE = 3
 
 #pylint: disable=too-many-arguments
-def execute_and_report_tests_to_worksheet(test_cases: list, worksheet : xlsxwriter.workbook.Worksheet, test_title: str, x_axis_name: str, y_axis_name: str, scenario: TestScenarios):
+def execute_and_report_tests_to_worksheet(test_cases: list, worksheet : xlsxwriter.workbook.Worksheet, test_title: str, x_axis_name: str, y_axis_name: str, scenario: PerformanceTestScenarios):
     """A function, which runs tests on a given set of inputs and then exports
     writes those results to an Excel file and makes a graph out of the results.
 
@@ -40,14 +40,14 @@ def execute_and_report_tests_to_worksheet(test_cases: list, worksheet : xlsxwrit
         labyrinth = Labyrinth(case["width"], case["height"], case["steps required"])
         start_time = time.time()
 
-        if scenario == TestScenarios.RANDOM_PATH:
+        if scenario == PerformanceTestScenarios.RANDOM_PATH:
             labyrinth.generate_random_shortest_path()
             labyrinth.generate_sidesteps()
-        elif scenario == TestScenarios.DFS_MAZE:
+        elif scenario == PerformanceTestScenarios.DFS_MAZE:
             labyrinth.generate_random_shortest_path()
             labyrinth.generate_sidesteps()
             labyrinth.generate_maze_around_path_dfs()
-        elif scenario == TestScenarios.PRIM_MAZE:
+        elif scenario == PerformanceTestScenarios.PRIM_MAZE:
             labyrinth.generate_random_shortest_path()
             labyrinth.generate_sidesteps()
             labyrinth.generate_maze_around_path_prim()
@@ -77,7 +77,8 @@ def execute_and_report_tests_to_worksheet(test_cases: list, worksheet : xlsxwrit
 
 
 if __name__ == "__main__":
-    workbook = xlsxwriter.Workbook("performance_report.xlsx")
+    file_name = "performance_report.xlsx"
+    workbook = xlsxwriter.Workbook(file_name)
     worksheet_path = workbook.add_worksheet("Path")
 
     #Test the performance of the sidestep algorithm
@@ -119,7 +120,7 @@ if __name__ == "__main__":
             "Execution time in relation to sidesteps done in a 10001x10001 grid when generating a random path",
             "Amount of sidesteps done",
             "Execution time (s)",
-            TestScenarios.RANDOM_PATH)
+            PerformanceTestScenarios.RANDOM_PATH)
 
     #Test the randomized DFS algorithm.
     worksheet_dfs = workbook.add_worksheet("DFS")
@@ -129,7 +130,7 @@ if __name__ == "__main__":
     "Execution time in relation to the size of the maze when generating a maze using DFS",
     "Size of a side of the maze",
     "Execution time (s)",
-    TestScenarios.DFS_MAZE)
+    PerformanceTestScenarios.DFS_MAZE)
 
     #Test the randomized Prim's algorithm.
     worksheet_prim = workbook.add_worksheet("Prim")
@@ -139,10 +140,10 @@ if __name__ == "__main__":
     "Execution time in relation to the size of the maze when generating a maze using PRIM",
     "Size of a side of the maze",
     "Execution time (s)",
-    TestScenarios.PRIM_MAZE)
+    PerformanceTestScenarios.PRIM_MAZE)
 
     #pylint: disable=anomalous-backslash-in-string
     #False positive when printing \performance
-    print(f"Tests done! Wrote the contents to {os.path.dirname(__file__)}\performance_report.xlsx")
+    print(f"Tests done! Wrote the contents to {os.path.abspath(file_name)}")
     #pylint: enable=anomalous-backslash-in-string
     workbook.close()

@@ -23,4 +23,4 @@ def lint(c):
 
 @task
 def test_performance(c):
-    c.run("python src/tests/performance_test.py")
+    c.run("python src/performance_test.py", pty=True)
