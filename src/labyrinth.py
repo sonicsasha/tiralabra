@@ -345,7 +345,6 @@ class Labyrinth:
         The algorithm goes through every cell in the path
         and adds the adjacent walls and the cell those walls lead to to a list.
         """
-        self.walls_to_break = []
 
         # Go through the path and add the walls of the path to a path list.
 
