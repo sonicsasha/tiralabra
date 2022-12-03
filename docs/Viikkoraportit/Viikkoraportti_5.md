@@ -5,3 +5,5 @@ Muuten ei ollut mitään vaikkeuksia. Mielestäni ohjelma on jo aika lailla valm
 Minulla on nyt ehkä pieni kysymys suoritettavaan ohjelmaan liittyen. Onko Pythonilla tehdessä olemassa parempia vaihtoehtoja kuin se, että Pyinstaller:illa tekee suoritettavan tiedoston (esim. Windowsilla .exe-tiedosto)?
 
 Ja vielä vertaisarvioinnista. En ole vielä (3.12.2022 klo 11:35) saanut minkäänlaista vertaispalautetta työlleni, joten jos sitä ei missään vaiheessa saavukaan, niin saanko vertaispalautetta jostain muualta vai joudunko vain elämään ilman ensimmäistä vertaispalautetta? Olisi vain kiva tietää, että miten voisin vielä parantaa ohjelmaa :)
+
+Riippuen aikataulustani alan seuraavaksi varmaankin tekemään aikaisemmin mainittua käyttöliittymää, ja muutenkin koodissani on varmaan vielä jonkin verran optimoitavia ja kommentoitavia asioita, joita voisi vielä korjailla.
