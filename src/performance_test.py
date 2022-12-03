@@ -84,15 +84,30 @@ if __name__ == "__main__":
     #Test the performance of the sidestep algorithm
     #Everything is done on a 10001x10001 maze so that the size of the labyrinth would have minimal effect on the performance of the algorithm.
     path_generation_test_cases =    [{"width": 10001, "height": 10001, "steps required": 20000},
-                                    {"width": 10001, "height": 10001, "steps required": 20004},
-                                    {"width": 10001, "height": 10001, "steps required": 20040},
-                                    {"width": 10001, "height": 10001, "steps required": 20400},
                                     {"width": 10001, "height": 10001, "steps required": 24000},
                                     {"width": 10001, "height": 10001, "steps required": 28000},
                                     {"width": 10001, "height": 10001, "steps required": 38000},
                                     {"width": 10001, "height": 10001, "steps required": 48000},
                                     {"width": 10001, "height": 10001, "steps required": 55000},
-                                    {"width": 10001, "height": 10001, "steps required": 60000}]
+                                    {"width": 10001, "height": 10001, "steps required": 60000},
+                                    {"width": 10001, "height": 10001, "steps required": 68000},
+                                    {"width": 10001, "height": 10001, "steps required": 76000},
+                                    {"width": 10001, "height": 10001, "steps required": 84000},
+                                    {"width": 10001, "height": 10001, "steps required": 92000},
+                                    {"width": 10001, "height": 10001, "steps required": 100000},
+                                    {"width": 10001, "height": 10001, "steps required": 140000},
+                                    {"width": 10001, "height": 10001, "steps required": 180000},
+                                    {"width": 10001, "height": 10001, "steps required": 220000},
+                                    {"width": 10001, "height": 10001, "steps required": 260000},
+                                    {"width": 10001, "height": 10001, "steps required": 300000},
+                                    {"width": 10001, "height": 10001, "steps required": 340000},
+                                    {"width": 10001, "height": 10001, "steps required": 380000},
+                                    {"width": 10001, "height": 10001, "steps required": 420000},
+                                    {"width": 10001, "height": 10001, "steps required": 460000},
+                                    {"width": 10001, "height": 10001, "steps required": 500000},
+                                    {"width": 10001, "height": 10001, "steps required": 620000},
+                                    {"width": 10001, "height": 10001, "steps required": 760000},
+                                    {"width": 10001, "height": 10001, "steps required": 880000}]
 
     #Test the maze generation algorithms with these inputs. Notice then when input is raised by x, the labyrinth grows in size by x^2.
     maze_generation_test_cases =    [{"width": 5, "height": 5},

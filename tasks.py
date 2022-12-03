@@ -22,5 +22,5 @@ def lint(c):
     c.run("pylint src")
 
 @task
-def test_performance(c):
+def performance_test(c):
     c.run("python src/performance_test.py", pty=True)

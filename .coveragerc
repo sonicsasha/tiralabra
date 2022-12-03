@@ -2,4 +2,5 @@
 omit =
     src/tests/*
     src/labyrinth_drawer.py
+    src/performance_test.py
 

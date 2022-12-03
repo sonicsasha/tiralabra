@@ -161,7 +161,7 @@ class Labyrinth:
                 if (
                     self.labyrinth_matrix[y + 1][x] == "."
                     and self.labyrinth_matrix[y - 1][x] == "."
-                    and y >= 0
+                    and y > 0
                 ):
                     horizontal_sidestep = True
             except IndexError:
@@ -219,7 +219,6 @@ class Labyrinth:
 
                             self.labyrinth_matrix[y][x] = "#"
 
-                            random.shuffle(self.broken_walls)
                             sidesteps_to_do -= 1
                             break
                 except IndexError:
