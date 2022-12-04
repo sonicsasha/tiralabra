@@ -1,4 +1,7 @@
 from labyrinth import Labyrinth, UserInputError
+from generators.path_generator import PathGenerator
+from generators.maze_generator_dfs import MazeGeneratorDFS
+from generators.maze_generator_prim import MazeGeneratorPrim
 import unittest
 
 
@@ -17,7 +20,8 @@ class TestLabyrinthGeneration(unittest.TestCase):
 
     def test_cannot_create_maze_with_large_amount_of_steps(self):
         maze = Labyrinth(3, 3, 124)
-        self.assertRaises(UserInputError, maze.generate_maze_dfs)
+        PathGenerator(maze).generate_random_shortest_path()
+        self.assertRaises(UserInputError, PathGenerator(maze).generate_sidesteps)
 
     def test_can_create_maze_with_valid_inputs(self):
         maze = Labyrinth(5, 5, 12)
@@ -96,14 +100,26 @@ def goal_is_reached_in_required_amount_of_steps(labyrinth):
     return bfs_matrix[0][labyrinth.width - 1] == labyrinth.steps_required
 
 
+def generate_maze_dfs(maze):
+    PathGenerator(maze).generate_random_shortest_path()
+    PathGenerator(maze).generate_sidesteps()
+    MazeGeneratorDFS(maze).generate_maze_around_path()
+
+
+def generate_maze_prim(maze):
+    PathGenerator(maze).generate_random_shortest_path()
+    PathGenerator(maze).generate_sidesteps()
+    MazeGeneratorPrim(maze).generate_maze_around_path()
+
+
 class TestLabyrinthFeaturesDFS(unittest.TestCase):
     def setup_class(self):
         self.maze = Labyrinth(11, 11, 36)
-        self.maze.generate_maze_dfs()
+        generate_maze_dfs(self.maze)
 
     def test_generates_correct_5x5_labyrinth_with_16_steps(self):
         test_maze = Labyrinth(5, 5, 16)
-        test_maze.generate_maze_dfs()
+        generate_maze_dfs(test_maze)
 
         correct_maze = False
 
@@ -135,11 +151,11 @@ class TestLabyrinthFeaturesDFS(unittest.TestCase):
 class TestLabyrinthFeaturesPrim(unittest.TestCase):
     def setup_class(self):
         self.maze = Labyrinth(11, 11, 36)
-        self.maze.generate_maze_prim()
+        generate_maze_prim(self.maze)
 
     def test_generates_correct_5x5_labyrinth_with_16_steps(self):
         test_maze = Labyrinth(5, 5, 16)
-        test_maze.generate_maze_prim()
+        generate_maze_prim(test_maze)
 
         correct_maze = False
 

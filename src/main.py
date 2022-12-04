@@ -1,22 +1,25 @@
 import copy
+import os
 
 from labyrinth import Labyrinth
 from labyrinth_drawer import LabyrinthDrawer
+from generators.path_generator import PathGenerator
+from generators.maze_generator_dfs import MazeGeneratorDFS
+from generators.maze_generator_prim import MazeGeneratorPrim
 
 if __name__ == "__main__":
-
     labyrinth = Labyrinth(1001, 501, 45824)
-    labyrinth.generate_random_shortest_path()
+    PathGenerator(labyrinth).generate_random_shortest_path()
     shortest_path = copy.deepcopy(labyrinth)
 
-    labyrinth.generate_sidesteps()
+    PathGenerator(labyrinth).generate_sidesteps()
     path_with_sidesteps = copy.deepcopy(labyrinth)
 
-    labyrinth.generate_maze_around_path_prim()
+    MazeGeneratorPrim(labyrinth).generate_maze_around_path()
     prim = labyrinth
 
     dfs = copy.deepcopy(path_with_sidesteps)
-    dfs.generate_maze_around_path_dfs()
+    MazeGeneratorDFS(dfs).generate_maze_around_path()
 
     LabyrinthDrawer(
         [

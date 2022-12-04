@@ -1,6 +1,7 @@
 [MASTER]
 disable=
     C0114, # missing-module-docstring
+    too-few-public-methods
 
 extension-pkg-whitelist=
 	pygame

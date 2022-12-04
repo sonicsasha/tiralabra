@@ -2,7 +2,7 @@ from invoke import task
 
 @task
 def start(c):
-    c.run("python src/index.py")
+    c.run("python src/main.py", pty=True)
 
 @task
 def test(c):
@@ -23,4 +23,4 @@ def lint(c):
 
 @task
 def performance_test(c):
-    c.run("python src/performance_test.py", pty=True)
+    c.run("python src/tests/performance_test.py", pty=True)
