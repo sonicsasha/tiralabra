@@ -27,4 +27,4 @@ def performance_test(c):
 
 @task
 def build(c):
-    c.run("pyinstaller --onefile -y src/main.py")
+    c.run("pyinstaller --onefile -y --name MazeGen src/main.py")
