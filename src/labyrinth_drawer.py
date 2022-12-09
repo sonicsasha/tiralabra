@@ -1,3 +1,5 @@
+import os
+os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "true"
 import pygame
 
 
@@ -92,6 +94,7 @@ class LabyrinthDrawer:
         self.cell_size = self.screen_width / self.labyrinth_to_draw.width
         screen_height = self.cell_size * self.labyrinth_to_draw.height + self.overhead
         self.screen = pygame.display.set_mode([self.screen_width, screen_height])
+        pygame.display.set_caption("MazeGen")
 
         self.draw_loop()
 

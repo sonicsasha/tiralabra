@@ -24,3 +24,7 @@ def lint(c):
 @task
 def performance_test(c):
     c.run("python src/tests/performance_test.py", pty=True)
+
+@task
+def build(c):
+    c.run("pyinstaller --onefile -y src/main.py")
