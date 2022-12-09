@@ -37,4 +37,5 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         file: dist/${{ matrix.FILE_NAME }}
+        asset_name: mazegen_${{ matrix.os }}
       
