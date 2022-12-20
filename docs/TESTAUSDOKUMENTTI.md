@@ -1,7 +1,3 @@
-# Yksikkötestauksen kattavuusraportti
-
-Kattavuusraportin voi löytää [Codecov](https://app.codecov.io/gh/sonicsasha/tiralabra):ista.
-
 # Yksikkötestit
 ## Mitä testataan ja miten
 
@@ -20,14 +16,15 @@ Lisäksi testataan, että algoritmi generoi oikein 5x5 labyrintin, joka halutaan
 Testit voi suorittaa omalla koneella syöttämällä komentokehotteeseen komento 
 `poetry run invoke test`
 
-# Suorituskykytestit
 ## Yksikkötestauksen kattavuusraportti
 Kattavuusraportin näkee alta:
 
 [![codecov](https://codecov.io/gh/sonicsasha/tiralabra/branch/main/graph/badge.svg?token=KDR8Z7R8I1)](https://codecov.io/gh/sonicsasha/tiralabra)
 
+# Suorituskykytestit
+
 ## Mitä testataan
-Koska ohjelman toiminta perustuu kahteen peräkkäin toimivaan algoritmiin (ensiksi polun luonti ja sen jälkeen itse labyrintti), joten testasin näiden toimintaa erikseen.
+Koska ohjelman toiminta perustuu kahteen peräkkäin toimivaan algoritmiin (ensiksi polun luonti ja sen jälkeen itse labyrintti), niin testasin näiden toimintaa erikseen.
 Suorituskykyä testataan niin, että ensiksi yritetään luoda satunnaista polkua 10001x10001-labyrinttiin eri määrällä haluttuja askelia. Tämän jälkeen luodaan erikokoisia labyrinttejä, missä polku lähdöstä maaliin on lyhin mahdollinen, jotta polunluontialgoritmilla olisi mahdollisimman pieni ja ennustettava vaikutus suoritusaikaan. Nämä testit suoritetaan sekä syvyyshaulla että Primin algoritmilla samoilla syötteillä.
 Nämä testit voi suorittaa omalla koneella komennolla
 

@@ -15,6 +15,7 @@ class MazeGeneratorPrim:
                                     Has to have at least one path cell.
         """
         self.labyrinth = labyrinth
+        self.walls_to_break = []
 
     def generate_maze_around_path(self):
         """Given that a random path has been generated, creates a maze around that path
@@ -31,14 +32,14 @@ class MazeGeneratorPrim:
                 if cell == "." and row_number % 2 == 0 and column_number % 2 == 0:
                     self._add_adjacent_walls_to_list(row_number, column_number)
 
-        while len(self.labyrinth.walls_to_break) > 0:
+        while len(self.walls_to_break) > 0:
             # Pop a random item from list
-            i = random.randrange(len(self.labyrinth.walls_to_break))
-            self.labyrinth.walls_to_break[i], self.labyrinth.walls_to_break[-1] = (
-                self.labyrinth.walls_to_break[-1],
-                self.labyrinth.walls_to_break[i],
+            i = random.randrange(len(self.walls_to_break))
+            self.walls_to_break[i], self.walls_to_break[-1] = (
+                self.walls_to_break[-1],
+                self.walls_to_break[i],
             )
-            wall, cell = self.labyrinth.walls_to_break.pop()
+            wall, cell = self.walls_to_break.pop()
 
             wall_y = wall[0]
             wall_x = wall[1]
@@ -73,7 +74,7 @@ class MazeGeneratorPrim:
                     ]
                     == "#"
                 ):
-                    self.labyrinth.walls_to_break.append(
+                    self.walls_to_break.append(
                         (
                             (
                                 y + direction[0],

@@ -78,12 +78,14 @@ class LabyrinthDrawer:
         # where the first element of the tuple is the labyrinth
         # and the second element is the name shown on the button
         for labyrinth in labyrinths:
+            button_text = labyrinth[1]
+            labyrinth_to_show_on_click = labyrinth[0]
             self.buttons.append(
                 Button(
                     (button_x, button_y),
                     (button_width, button_height),
-                    labyrinth[1],
-                    labyrinth[0],
+                    button_text,
+                    labyrinth_to_show_on_click
                 )
             )
             button_x += button_width + 10

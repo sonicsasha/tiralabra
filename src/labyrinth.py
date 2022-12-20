@@ -1,3 +1,5 @@
+import textwrap
+
 class UserInputError(Exception):
     """An exception that is raised when the user inputs an invalid value"""
 
@@ -35,10 +37,10 @@ class Labyrinth:
 
         if min_step_count > steps_required:
             raise UserInputError(
-                f"""Annetun kokoista labyrinttiä ei pysty ratkaisemaan
-                    annetussa määrässä askelia.
-                    Ole hyvä ja anna joko pienempi labyrintin koko tai suurempi määrä askelia.
-                    Pienin määrä askelia annetuulla koolla on {min_step_count}"""
+                "Annetun kokoista labyrinttiä ei pysty ratkaisemaan"
+                " annetussa määrässä askelia. \n"
+                "Ole hyvä ja anna joko pienempi labyrintin koko tai suurempi määrä askelia. \n"
+                f"Pienin määrä askelia annetuulla koolla on {min_step_count}"
             )
 
         if (steps_required - min_step_count) % 4 != 0:
@@ -46,12 +48,12 @@ class Labyrinth:
                 min_step_count + ((steps_required - min_step_count) // 4) * 4
             )
             raise UserInputError(
-                f"""Annetun kokoista labyrinttiä ei pysty ratkaisemaan
-                annetussa määrässä askelia.
-                Ole hyvä, ja anna joko eri labyrintin koko tai eri määrä askelia.
-                Lähimmät mahdolliset askeleet ovat
-                {acceptable_step_count} ja {acceptable_step_count + 4}"""
-            )
+                    "Annetun kokoista labyrinttiä ei pysty ratkaisemaan "
+                    "annetussa määrässä askelia. \n"
+                    "Ole hyvä, ja anna joko eri labyrintin koko tai eri määrä askelia. \n"
+                    "Lähimmät mahdolliset askeleet ovat "
+                    f"{acceptable_step_count} ja {acceptable_step_count + 4}"
+                )
 
         self.labyrinth_matrix = []
         self.width = width
@@ -60,9 +62,6 @@ class Labyrinth:
 
         # This is used for the randomized path generation
         self.broken_walls = []
-
-        # This is used for Prim's algorithm
-        self.walls_to_break = []
 
         # If conditions are met and everything is alright, generate an empty maze filled with "#"
 
