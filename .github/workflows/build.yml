@@ -2,7 +2,7 @@ name: Build an executable and upload to release
 
 on:
   push:
-    tags: v.*
+    tags: v*
 
 jobs:
   build:
