@@ -12,13 +12,16 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            FILE_NAME: MazeGen
+            SRC_FILE_NAME: MazeGen
+            DEST_FILE_NAME: MazeGen_Linux
           
           - os: windows-latest
-            FILE_NAME: MazeGen.exe
+            SRC_FILE_NAME: MazeGen.exe
+            DEST_FILE_NAME: MazeGen_Windows.exe
           
           - os: macos-latest
-            FILE_NAME: MazeGen
+            SRC_FILE_NAME: MazeGen
+            DEST_FILE_NAME: MazeGen_Mac
       
 
     steps:
@@ -36,6 +39,5 @@ jobs:
     - name: Upload build
       uses: svenstaro/upload-release-action@v2
       with:
-        file: dist/${{ matrix.FILE_NAME }}
-        asset_name: mazegen_${{ matrix.os }}
-      
+        file: dist/${{ matrix.SRC_FILE_NAME }}
+        asset_name: ${{ matrix.DEST_FILE_NAME }}
