@@ -1,12 +1,15 @@
 from invoke import task
+import platform
+
+is_not_windows = bool(platform.system()!="Windows")
 
 @task
 def start(c):
-    c.run("python src/main.py", pty=True)
+    c.run("python src/main.py", pty=is_not_windows)
 
 @task
 def test(c):
-    c.run("pytest src", pty=True)
+    c.run("pytest src")
 
 @task
 def coverage(c):
@@ -19,11 +22,11 @@ def format(c):
 
 @task
 def lint(c):
-    c.run("pylint src")
+    c.run("pylint src", pty=is_not_windows)
 
 @task
 def performance_test(c):
-    c.run("python src/tests/performance_test.py", pty=True)
+    c.run("python src/tests/performance_test.py", pty=is_not_windows)
 
 @task
 def build(c):

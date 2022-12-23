@@ -4,7 +4,7 @@ import sys
 from enum import Enum
 import xlsxwriter
 
-#Needed so that the classes are properly imported.
+# Needed so that the classes are properly imported.
 sys.path.append("src")
 
 from labyrinth import Labyrinth

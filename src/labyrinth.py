@@ -1,5 +1,3 @@
-import textwrap
-
 class UserInputError(Exception):
     """An exception that is raised when the user inputs an invalid value"""
 
@@ -48,12 +46,12 @@ class Labyrinth:
                 min_step_count + ((steps_required - min_step_count) // 4) * 4
             )
             raise UserInputError(
-                    "Annetun kokoista labyrinttiä ei pysty ratkaisemaan "
-                    "annetussa määrässä askelia. \n"
-                    "Ole hyvä, ja anna joko eri labyrintin koko tai eri määrä askelia. \n"
-                    "Lähimmät mahdolliset askeleet ovat "
-                    f"{acceptable_step_count} ja {acceptable_step_count + 4}"
-                )
+                "Annetun kokoista labyrinttiä ei pysty ratkaisemaan "
+                "annetussa määrässä askelia. \n"
+                "Ole hyvä, ja anna joko eri labyrintin koko tai eri määrä askelia. \n"
+                "Lähimmät mahdolliset askeleet ovat "
+                f"{acceptable_step_count} ja {acceptable_step_count + 4}"
+            )
 
         self.labyrinth_matrix = []
         self.width = width

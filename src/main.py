@@ -1,5 +1,5 @@
-#!/usr/bin/env python
 import copy
+import os
 
 from labyrinth import Labyrinth, UserInputError
 from labyrinth_drawer import LabyrinthDrawer
@@ -7,19 +7,30 @@ from generators.path_generator import PathGenerator
 from generators.maze_generator_dfs import MazeGeneratorDFS
 from generators.maze_generator_prim import MazeGeneratorPrim
 
-def get_int_input(message : str):
+
+def get_int_input(message: str) -> int:
+    """Gets an input and turns it into an integer
+
+    Args:
+        message (str): The message to show to the player when getting the input
+
+    Returns:
+        int: Returns the number that the user inputted. None if not a number
+    """
     while True:
         # Test if the input is acceptable
         try:
             value = int(input(message))
-            Labyrinth(value, value, 2*value + 6)
+            Labyrinth(value, value, 2 * value + 6)
             return value
-        except UserInputError as error:
-            print(f"\n{error}\n")
+        except UserInputError as error_message:
+            print(f"\n{error_message}\n")
         except ValueError:
             return None
 
+
 if __name__ == "__main__":
+    os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "true"
     print("Tervetuloa luomaan unelmiesi labyrintit!")
     print("Jätä syöte tyhjäksi poistuaksesi ohjelmasta")
 
@@ -32,29 +43,34 @@ if __name__ == "__main__":
         if not height:
             break
 
+        required_steps = get_int_input("Syötä askelten määrä, jossa labyrintti täytyy läpäistä: ")
+        if not required_steps:
+            break
 
         while True:
             try:
-                required_steps = int(input("Syötä askelten määrä, jossa labyrintti täytyy läpäistä: "))
-                labyrinth = Labyrinth(width, height, required_steps)
+                required_steps = int(
+                    input("Syötä askelten määrä, jossa labyrintti täytyy läpäistä: ")
+                )
+                LABYRINTH = Labyrinth(width, height, required_steps)
                 break
             except UserInputError as error:
                 print(f"\n{error}\n")
             except ValueError:
-                labyrinth = None
+                LABYRINTH = None
                 break
-        
-        if not labyrinth:
+
+        if not LABYRINTH:
             break
 
-        PathGenerator(labyrinth).generate_random_shortest_path()
-        shortest_path = copy.deepcopy(labyrinth)
+        PathGenerator(LABYRINTH).generate_random_shortest_path()
+        shortest_path = copy.deepcopy(LABYRINTH)
 
-        PathGenerator(labyrinth).generate_sidesteps()
-        path_with_sidesteps = copy.deepcopy(labyrinth)
+        PathGenerator(LABYRINTH).generate_sidesteps()
+        path_with_sidesteps = copy.deepcopy(LABYRINTH)
 
-        MazeGeneratorPrim(labyrinth).generate_maze_around_path()
-        prim = labyrinth
+        MazeGeneratorPrim(LABYRINTH).generate_maze_around_path()
+        prim = LABYRINTH
 
         dfs = copy.deepcopy(path_with_sidesteps)
         MazeGeneratorDFS(dfs).generate_maze_around_path()
@@ -67,5 +83,3 @@ if __name__ == "__main__":
                 (dfs, "Satunnainen syvyyshaku"),
             ]
         )
-
-        

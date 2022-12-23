@@ -1,5 +1,3 @@
-import os
-os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "true"
 import pygame
 
 
@@ -85,7 +83,7 @@ class LabyrinthDrawer:
                     (button_x, button_y),
                     (button_width, button_height),
                     button_text,
-                    labyrinth_to_show_on_click
+                    labyrinth_to_show_on_click,
                 )
             )
             button_x += button_width + 10

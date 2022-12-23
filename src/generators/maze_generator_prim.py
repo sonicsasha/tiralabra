@@ -27,36 +27,42 @@ class MazeGeneratorPrim:
 
         # Go through the path and add the walls of the path to a path list.
 
+        self._find_walls_to_break()
+
+        while len(self.walls_to_break) > 0:
+            self._break_random_wall()
+
+        return self.labyrinth.labyrinth_matrix
+
+    def _find_walls_to_break(self):
         for row_number, row in enumerate(self.labyrinth.labyrinth_matrix):
             for column_number, cell in enumerate(row):
                 if cell == "." and row_number % 2 == 0 and column_number % 2 == 0:
                     self._add_adjacent_walls_to_list(row_number, column_number)
 
-        while len(self.walls_to_break) > 0:
-            # Pop a random item from list
-            i = random.randrange(len(self.walls_to_break))
-            self.walls_to_break[i], self.walls_to_break[-1] = (
-                self.walls_to_break[-1],
-                self.walls_to_break[i],
-            )
-            wall, cell = self.walls_to_break.pop()
+    def _break_random_wall(self):
+        # Pop a random item from list
+        i = random.randrange(len(self.walls_to_break))
+        self.walls_to_break[i], self.walls_to_break[-1] = (
+            self.walls_to_break[-1],
+            self.walls_to_break[i],
+        )
+        wall, cell = self.walls_to_break.pop()
 
-            wall_y = wall[0]
-            wall_x = wall[1]
+        wall_y = wall[0]
+        wall_x = wall[1]
 
-            cell_y = cell[0]
-            cell_x = cell[1]
+        cell_y = cell[0]
+        cell_x = cell[1]
 
-            if (
-                self.labyrinth.labyrinth_matrix[wall_y][wall_x] == "#"
-                and self.labyrinth.labyrinth_matrix[cell_y][cell_x] == "#"
-            ):
-                self.labyrinth.labyrinth_matrix[wall_y][wall_x] = "."
-                self.labyrinth.labyrinth_matrix[cell_y][cell_x] = "."
+        if (
+            self.labyrinth.labyrinth_matrix[wall_y][wall_x] == "#"
+            and self.labyrinth.labyrinth_matrix[cell_y][cell_x] == "#"
+        ):
+            self.labyrinth.labyrinth_matrix[wall_y][wall_x] = "."
+            self.labyrinth.labyrinth_matrix[cell_y][cell_x] = "."
 
-                self._add_adjacent_walls_to_list(cell_y, cell_x)
-
-        return self.labyrinth.labyrinth_matrix
+            self._add_adjacent_walls_to_list(cell_y, cell_x)
 
     def _add_adjacent_walls_to_list(self, y, x):
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]

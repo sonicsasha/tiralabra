@@ -27,19 +27,8 @@ class MazeGeneratorDFS:
         # Check the path which has been generated.
         # This will allow the program to randomly choose a cell
         # from which to start generating the maze.
-        path_cells = []
 
-        for row_number, row in enumerate(self.labyrinth.labyrinth_matrix):
-            for column_number, cell in enumerate(row):
-                if (
-                    cell == "."
-                    and row_number % 2 == 0
-                    and column_number % 2 == 0
-                    and not (
-                        row_number == 0 and column_number == self.labyrinth.width - 1
-                    )
-                ):
-                    path_cells.append((row_number, column_number))
+        path_cells = self._find_path_cells()
 
         # Go through every cell in the path so that there is a path in every area of the maze.
 
@@ -72,6 +61,23 @@ class MazeGeneratorDFS:
                     pass
 
         return self.labyrinth.labyrinth_matrix
+
+    def _find_path_cells(self):
+        path_cells = []
+
+        for row_number, row in enumerate(self.labyrinth.labyrinth_matrix):
+            for column_number, cell in enumerate(row):
+                if (
+                    cell == "."
+                    and row_number % 2 == 0
+                    and column_number % 2 == 0
+                    and not (
+                        row_number == 0 and column_number == self.labyrinth.width - 1
+                    )
+                ):
+                    path_cells.append((row_number, column_number))
+
+        return path_cells
 
     def _generate_random_path(self, y: int, x: int):
         """Given a cell, start a randomized depth search from said cell
