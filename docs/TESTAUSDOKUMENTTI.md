@@ -108,7 +108,7 @@ Suorituskykytestien raportin voi lukea suoraan [täältä](/performance_report.x
 | 10001 | 10001  | 760000         | 3.28734374046326  |
 | 10001 | 10001  | 880000         | 3.87917375564575  |
 
-![Polunluontialgoritmin suorituskykytestien kuvaaja](/docs/img/path.png)
+![Polunluontialgoritmin suorituskykytestien kuvaaja](/docs/img/path_performance.png)
 
 ### Syvyyshaku
 | Leveys | Korkeus | Vaaditut askeleet | Suoritusaika (s)       |
@@ -125,7 +125,7 @@ Suorituskykytestien raportin voi lukea suoraan [täältä](/performance_report.x
 | 8001  | 8001   | 16000          | 156.648549556732     |
 | 10001 | 10001  | 20000          | 278.019733428955     |
 
-![Syvyyshaulla toimivan labyrintin luontialgoritmin suorituskykytestien kuvaaja](/docs/img/dfs.png)
+![Syvyyshaulla toimivan labyrintin luontialgoritmin suorituskykytestien kuvaaja](/docs/img/dfs_performance.png)
 
 ### Primin algoritmi
 | Leveys | Korkeus | Vaaditut askeleet | Suoritusaika (s)       |
@@ -142,4 +142,4 @@ Suorituskykytestien raportin voi lukea suoraan [täältä](/performance_report.x
 | 8001  | 8001   | 16000          | 147.457976341248     |
 | 10001 | 10001  | 20000          | 239.375643491745     |
 
-![Primin algoritmilla toimivan labyrintin luontialgoritmin suorituskykytestien kuvaaja](/docs/img/prim.png)
+![Primin algoritmilla toimivan labyrintin luontialgoritmin suorituskykytestien kuvaaja](/docs/img/prim_performance.png)
